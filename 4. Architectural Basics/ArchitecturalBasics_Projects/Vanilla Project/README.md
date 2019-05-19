@@ -25,4 +25,5 @@ We convolve on our training set using 3x3 kernel and when  we reached 512 channe
 Things we need to improve in our model:
 1. Reduce number of parameteres used in training.
 2. Increase model accuracy more.
-3.  Reduce training time
+3. Reduce training time
+4. Too much waiting time to know model accurcy
