@@ -3,32 +3,29 @@
 Here we will try removing the problem with our previous model.
 
 ```
-model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(28,28,1))) #26
+# Extract edges and geadients features
+model.add(Convolution2D(16, (3, 3), activation='relu', input_shape=(28,28,1))) #26
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
 
-
-model.add(Convolution2D(64, (3, 3), activation='relu')) #24
-model.add(BatchNormalization())
-model.add(Dropout(0.1))
+# Trying to extract more features by increasing channels 
+model.add(Convolution2D(32, (3, 3), activation='relu')) #24
 
 model.add(MaxPooling2D(pool_size=(2, 2))) #12
-model.add(Convolution2D(10, (1, 1), activation='relu')) #12
+
+# Since we have done  MP above we should try using 1x1 and fetch co dependend features.
+model.add(Convolution2D(16, (1, 1), activation='relu')) #12
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
 
+# Trying to Increase the channels to fetch parts of object
 model.add(Convolution2D(32, (3, 3), activation='relu')) #10
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
 
-model.add(Convolution2D(64, (3, 3), activation='relu')) #8
-model.add(BatchNormalization())
-model.add(Dropout(0.1))
+model.add(Convolution2D(10, (3, 3), activation='relu')) #8
 
-model.add(MaxPooling2D(pool_size=(2, 2))) #4
-model.add(Convolution2D(10, (4,4))) 
-model.add(BatchNormalization())
-model.add(Dropout(0.1))
+model.add(Convolution2D(10, (8,8))) 
 
 model.add(Flatten())
 model.add(Activation('softmax'))
