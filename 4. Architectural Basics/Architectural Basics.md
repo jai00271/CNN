@@ -84,10 +84,10 @@ We want our neural network to be effective and the best way to know if your neur
 When our model is doing well on training data but performing poor on test/ real data we know our model overfits. 
 
 16. What should be the distance of MaxPooling from Prediction layer?
-
+MaxPooling should be minimum 2 layers before performing Prediction.
 
 17. What should be the distance of Batch Normalization from Prediction layer?
-
+Batch normalization should be minimum 1 layer before last convolution layer.
 
 18. When do we stop convolutions and go ahead with a larger kernel or some other alternative (which we have not yet covered)
 When we are processing high-quality images where extracting features is computationally very expensive and we can't process image with normal 3x3 convolutions.
