@@ -36,4 +36,4 @@ model.add(Activation('softmax'))
 
 Things we modified in the above program are:
 1. Added batchNormalization layer before dropout so that we normalize the weights before dropping them.
-2. Increased Batch size to 128 from 36.
+2. Increased Batch size to 128 from 36 to reduce the epoch time.
