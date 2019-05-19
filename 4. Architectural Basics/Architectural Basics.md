@@ -119,6 +119,7 @@ np.random.shuffle ( data )
      params = params - learning_rate * params_grad
 ```
 SGD fluctuation:
+![alt text](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#/media/File:Stogra.png)
 
 Recently many new optimizers became famous and one such optimizer is Adam.
 Adaptive Moment Estimation(Adam) is another method that compute adaptive learning rates for each parameter. It reaches minima faster than SGD and is also effiecient in memory consumption. [Read here](
