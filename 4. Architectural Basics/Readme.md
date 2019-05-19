@@ -1,3 +1,5 @@
+<h3>Some general topics</h3>
+
 1. How to decide the number of layers in neural network?
 
 This entirely depends upon the size of the input image. Our thought process behind adding layers should solve 2 main problemss:
