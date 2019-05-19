@@ -32,10 +32,10 @@ Softmax assigns decimal probabilities to each class in a multi-class problem. Al
 7. What is Learning Rate?
 LR determines how fast we want to move towards global/ local minima. Less value leads to small steps towards minima causing excessive delay in the process while high value means big steps and you might overshoot and never reach minima.
 
-Kernels and how do we decide the number of kernels?
+8. What are Kernels and how do we decide the number of kernels?
 We have multiple options when it comes to kernels like 1x1, 3x3, 11x11. But we prefer 3x3 kernel as it has become standard across the industry(read my first [blog](https://dev.to/jai00271/background-basics-21bl) for better understanding).
 
-8. What is Batch Normalization?
+9. What is Batch Normalization?
 Batch Normalization fixes covariate shift in Neural network by normalizing the output of the layers. 
 
 ![alt text](https://cdn-images-1.medium.com/max/2000/1*rXY5zJrDdHv6EdKhJvKqcA.png)
@@ -46,55 +46,55 @@ Batch normalization adds a normalization "layer" between each layers. Normalizat
 
 ![alt text](https://cdn-images-1.medium.com/max/2000/1*WRio7MD4JDeLww-CyrxEbg.png)
 
-9. What is Image Normalization?
+10. What is Image Normalization?
 When we are working with images we always won't get the data as we want to train our model. Many time we have to improvise and make changes to the input images and this is called normalization. So according to wiki, Normalization is a process that changes the range of pixel intensity values. Applications include photographs with poor contrast due to glare, for example. Normalization sometimes called contrast or histogram stretching. In more general fields of data processing, such as digital signal processing, it is referred to as dynamic range expansion. The purpose of dynamic range expansion in the various applications is usually to bring the image, or other types of signal, into a range that is more familiar or normal to the senses, hence the term normalization.
 
-10. What is the ideal position of MaxPooling?
+11. What is the ideal position of MaxPooling?
 Maxpooling is preferred minimum after 2 convolution layers. MP helps in reducing the number of parameters in the network.
 
-11. What is the Concept of Transition Layers and what is the position of Transition Layer?
+12. What is the Concept of Transition Layers and what is the position of Transition Layer?
 Transition layer which is the combination of [convolution + pooling] which is just a way of downsampling the representations calculated by dense blocks to the end as we move from 512x512 to 256x256 to 128x128 and so on. So in simple words decision on reducing/ increasing mathematical complexity of model happens in transition layers.
 
 ![alt text](https://i.stack.imgur.com/cSwqp.png)
 
-12. What is the number of Epochs and when to increase them?
+13. What is the number of Epochs and when to increase them?
 How many times the neural network will see the entire dataset is called epochs. For example, if the neural network runs 10 times on 60000 datasets, you will say my epochs are 10. We specify epochs when we train our model like(here epoch is 10):
 
 model.fit(X_train, Y_train, nb_epoch=10)
 
-13. What is DropOut?
+14. What is DropOut?
 We want our neural network to be effective and the best way to know if your neural network has learned the right features and not memorized the data, then we remove some neurons and run the network again. If results are good that means our network is well trained and if your network performance degrades that means some neuron learned the wrong feature/ memorized data and dictating terms in taking decision by the model. So to summarize, dropout is a regularization technique for reducing overfitting in neural networks.
 
-14. When do we introduce DropOut, or when do we know we have some overfitting
+15. When do we introduce DropOut, or when do we know we have some overfitting
 When our model is doing well on training data but performing poor on test/ real data we know our model overfits. 
 
-15. What should be the distance of MaxPooling from Prediction layer?
+16. What should be the distance of MaxPooling from Prediction layer?
 
 
 
-16. What should be the distance of Batch Normalization from Prediction layer?
+17. What should be the distance of Batch Normalization from Prediction layer?
 
 
-17. When do we stop convolutions and go ahead with a larger kernel or some other alternative (which we have not yet covered)
+18. When do we stop convolutions and go ahead with a larger kernel or some other alternative (which we have not yet covered)
 When we are processing high-quality images where extracting features is computationally very expensive and we can't process image with normal 3x3 convolutions.
 
-18. How do we know our network is not going well, comparatively, very early?
+19. How do we know our network is not going well, comparatively, very early?
 When our result after a first epoch is far from target number we know we started wrong and need to change things before retraining. 
 Let us consider MNSIT example. If the result of our first epoch is somewhere around 92% we are sure we won't touch 99.5% after n epochs as we have put wrong forward since beginning.
 
-19. What is batch size, and effects of batch size
+20. What is batch size, and effects of batch size
 The teacher said you will have 6 test of 1 hour during the whole year and each test will have 30 questions. Here 6 is the epoch and 30 is the batch size. Now the test is of 1 hour and if the teacher gives 60 questions to write, will you be able to do it? It will require you to probably write with both hands :) Let's use the same concept in the neural network. Larger batch size requires more memory power but decrease processing time whereas small batch size means less memory required but more processing time. 
 
-20. When to add validation checks?
+21. When to add validation checks?
 Ever wondered why we have so many tests before that final exam? It helps you figure out whether you are on the right track or not. When we get fewer marks in a test we know we have a problem here and we need to improve in this area/ layer(neural net). Validation checks are similar to that and we need to know the accuracy of our model after every epoch run instead of knowing it in the end after complete training and waiting for full training to get over to know the accuracy.
 
 
-21. LR schedule and concept behind it?
+22. LR schedule and concept behind it?
 Your learning rate determines how soon you want to reach your minima. If chosen less value the process might take more time to reach minima whereas if the value is chosen more it might overshoot and never reach minima.
 
 ![alt text](https://www.jeremyjordan.me/content/images/2018/02/Screen-Shot-2018-02-24-at-11.47.09-AM.png)
 
-22. What is is the difference between Adam vs SGD?
+23. What is is the difference between Adam vs SGD?
 Gradient descent aka batch Gradient Descent is the most common method used to optimize deep learning networks. As per the white paper:
 
 ```
