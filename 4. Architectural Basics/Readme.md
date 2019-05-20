@@ -1,24 +1,30 @@
+### Architectural Basics
+
 1. How to decide the number of layers in neural network?
-This entirely depends upon the size of the input image. Our thought process behind adding layers should solve 2 main problemss: a. Are we moving towards global minima without putting any overhead on our model. b. Is our model effective and optimized in terms of time and memory consumption.
+  This entirely depends upon the size of the input image. Our thought process behind adding layers should solve 2 main problems: 
+
+  a. Are we moving towards global minima without putting any overhead on our model. 
+
+  b. Is our model effective and optimized in terms of time and memory consumption.
 
 2. Explain MaxPooling?
-Let's break the question into 3 parts,
-	a. What is MaxPooling?
-		MaxPooling concept is used when we have to reduce the number of layers without losing important features in the image.
-	b. Why should we use them?
+  Let's break the question into 3 parts,
+  a. What is MaxPooling?
+  	MaxPooling concept is used when we have to reduce the number of layers without losing important features in the image.
+  b. Why should we use them?
 
-	c. When should we use them?
-		If we use MP on 400x400 image, its size will reduce to 200x200 thus reducing many layers as compared to convolution.
- 
+  c. When should we use them?
+  	If we use MP on 400x400 image, its size will reduce to 200x200 thus reducing many layers as compared to convolution.
+
 3. What is 1x1 Convolutions?
-So we generally increase channel in order 32, 64, 128, 512, 1024, 2048 and reset here to 32 and starts again. But the problem with this approach is these 32 complex and rich channels which we formed after merging 512 channel needs to remove some feature which is not useful for our network. If we use 3x3 to perform this channel reduction from 512 channel to 32 channel it will re-evaluate and gives new channel, but with 1x1 it will combine the 512 channels and give us 32 channels which won't let the noise such as the background to carry forward. An example would be like if your input image is a face, 3x3 will fetch 2 eyes separately whereas 1x1 will fetch both the eyes saying they always appear together. So when we want to reduce the number of channels we will use 1x1 instead of 3x3. Also a point to remember that 1x1 is computationally very cheap as it is only seeing 1 o/p kernel x n channel at a time instead of 9 o/p kernel x n channel blocks. Check out below image to understand it better.
-	![alt text](https://cdn-images-1.medium.com/max/800/1*HO0_VnNxAYE4k4dblpYzQA.png)
+  So we generally increase channel in order 32, 64, 128, 512, 1024, 2048 and reset here to 32 and starts again. But the problem with this approach is these 32 complex and rich channels which we formed after merging 512 channel needs to remove some feature which is not useful for our network. If we use 3x3 to perform this channel reduction from 512 channel to 32 channel it will re-evaluate and gives new channel, but with 1x1 it will combine the 512 channels and give us 32 channels which won't let the noise such as the background to carry forward. An example would be like if your input image is a face, 3x3 will fetch 2 eyes separately whereas 1x1 will fetch both the eyes saying they always appear together. So when we want to reduce the number of channels we will use 1x1 instead of 3x3. Also a point to remember that 1x1 is computationally very cheap as it is only seeing 1 o/p kernel x n channel at a time instead of 9 o/p kernel x n channel blocks. Check out below image to understand it better.
+  ![alt text](https://cdn-images-1.medium.com/max/800/1*HO0_VnNxAYE4k4dblpYzQA.png)
 
 4. What is 3x3 Convolutions:
-	An image is processed in multiple steps to extract Edges, texture, gradient, parts of object and object itself. Now to move from 1 step to another we need to process the image in such a way that they extract features from the previous layer just like how when we grow in age we use our experience before taking any decision.
+  An image is processed in multiple steps to extract Edges, texture, gradient, parts of object and object itself. Now to move from 1 step to another we need to process the image in such a way that they extract features from the previous layer just like how when we grow in age we use our experience before taking any decision.
 
 5. What is Receptive Field:
-So when we convolve on an image we reduce the image by 2 dimensions. For example, a 5x5 image after one convolution of 3x3 will become 3x3 in size. Now if we convolve on this 3x3 image again it will result in 1x1. Now using this 1x1 image actually I can see my 5x5 image. Let us check out below image and imagine them like a window. If you are standing after the last layer which is layer 3 and we open that 1x1 window you can see 3x3 which is 9 pixels and if I now open that 3x3 window you can see all 5x5 which is 25 pixel. So here the local receptive field for the layer 2 is 3(size of the matrix visible from 1 pixel) and for the layer 3, it will be 5(size of the matrix visible)
+  So when we convolve on an image we reduce the image by 2 dimensions. For example, a 5x5 image after one convolution of 3x3 will become 3x3 in size. Now if we convolve on this 3x3 image again it will result in 1x1. Now using this 1x1 image actually I can see my 5x5 image. Let us check out below image and imagine them like a window. If you are standing after the last layer which is layer 3 and we open that 1x1 window you can see 3x3 which is 9 pixels and if I now open that 3x3 window you can see all 5x5 which is 25 pixel. So here the local receptive field for the layer 2 is 3(size of the matrix visible from 1 pixel) and for the layer 3, it will be 5(size of the matrix visible)
 
 ![alt text](https://www.researchgate.net/publication/316950618/figure/fig4/AS:495826810007552@1495225731123/The-receptive-field-of-each-convolution-layer-with-a-3-3-kernel-The-green-area-marks.png)
 
@@ -121,3 +127,9 @@ SGD fluctuation:
 
 Recently many new optimizers became famous and one such optimizer is Adam. Adaptive Moment Estimation(Adam) is another method that compute adaptive learning rates for each parameter. It reaches minima faster than SGD and is also effiecient in memory consumption. 
 [Read here](https://stats.stackexchange.com/questions/220494/how-does-the-adam-method-of-stochastic-gradient-descent-work/220563#220563)
+
+
+
+[SGD WhitePaper](https://arxiv.org/abs/1609.04747)
+
+[Adam WhitePaper](<https://arxiv.org/abs/1412.6980v8>)
