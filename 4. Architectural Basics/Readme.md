@@ -1,3 +1,5 @@
+<h3>Architectural Basics</h3>
+
 1. How to decide the number of layers in neural network?
 This entirely depends upon the size of the input image. Our thought process behind adding layers should solve 2 main problemss: a. Are we moving towards global minima without putting any overhead on our model. b. Is our model effective and optimized in terms of time and memory consumption.
 
