@@ -3,21 +3,15 @@
 
 <li> <span style="background-color: #6a757c; border-left: 2px solid #ffeb8e">How to decide the number of layers in neural network? </span> </li>
 
-This entirely depends upon the size of the input image. Our thought process behind adding layers in our network should solve 2 main problems:
-
-<ol>
+This entirely depends upon the size of the input image. Our thought process behind adding layers in our network should solve 2 main problems:<ol>
 
 ​		<li>Are we moving towards global minima without putting any overhead on our model. 
 
-​		<li>Is our model effective and optimized in terms of time and memory consumption.
-
-</ol>
+​		<li>Is our model effective and optimized in terms of time and memory consumption.</ol>
 
 <li> <span style="background-color: #6a757c; border-left: 2px solid #ffeb8e">Explain MaxPooling?</span></li>
 
-Let's break the question into 2 parts:
-
-<ol>
+Let's break the question into 2 parts: <ol>
 
 <li><span style="background-color: #6a757c; border-left: 2px solid #ffeb8e">What is MaxPooling?</span></li>
 
@@ -25,9 +19,7 @@ MaxPooling concept is used when we have to reduce the number of layers without l
 
 <li><span style="background-color: #6a757c; border-left: 2px solid #ffeb8e">Why should we use them?</span></li>
 
-When we want to reduce the parameters in our network as with each layer addition to the network we are increasing the parameters and our network is becoming computationally expensive. If we use MP on 400x400 image and use 2x2 matrix to reduce the image, its size will reduce to 200x200 thus reducing many layers as compared to convolution.
-
-</ol>
+When we want to reduce the parameters in our network as with each layer addition to the network we are increasing the parameters and our network is becoming computationally expensive. If we use MP on 400x400 image and use 2x2 matrix to reduce the image, its size will reduce to 200x200 thus reducing many layers as compared to convolution.</ol>
 
 <li> <span style="background-color: #6a757c; border-left: 2px solid #ffeb8e">What is 1x1 Convolutions?</span></li>
 
