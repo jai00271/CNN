@@ -40,6 +40,11 @@ model.add(Dropout(0.1))
 model.add(Convolution2D(10, (3,3))) #3
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
+
+model.add(Convolution2D(10, (3,3))) 
+
+model.add(Flatten())
+model.add(Activation('softmax'))
 ```
 
 Things we modified in the above program are:
