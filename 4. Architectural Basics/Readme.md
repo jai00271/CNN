@@ -128,7 +128,7 @@ Your learning rate determines how soon you want to reach your minima. If chosen 
 
 Gradient descent aka batch Gradient Descent is the most common method used to optimize deep learning networks. As per the white paper:
 
-```
+```python
 Gradient descent is a way to minimize an objective function J(θ) parameterized by a model’s
 parameters θ ∈ (R^d) by updating the parameters in the opposite direction of the gradient of the objective function ∇θJ(θ) w.r.t. to the parameters. The learning rate η determines the size of the steps we take to reach a (local) minimum. In other words, we follow the direction of the slope of the surface created by the objective function downhill until we reach a valley
 
@@ -140,7 +140,7 @@ for i in range ( nb_epochs ):
 
 SGD is a variance of gradient descent. SGD unlike GD performs a paramtere update for *each* training example.
 
-```
+```python
 for i in range ( nb_epochs ):
 np.random.shuffle ( data )
   for example in data :
