@@ -37,7 +37,7 @@ model.add(Convolution2D(16, (3, 3), activation='relu')) #5
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
 
-model.add(Convolution2D(16, (3,3))) #3
+model.add(Convolution2D(10, (3,3))) #3
 model.add(BatchNormalization())
 model.add(Dropout(0.1))
 
