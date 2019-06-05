@@ -1,5 +1,7 @@
 ## Advanced Convolutions
 
+
+
 *Dilated Convolution a.k.a Atrous Convolution*
 
 Dilated convolutions helps us in increasing the receptive field without adding any parameters to our network. The key application the dilated convolution authors have in mind is dense prediction: vision applications where the predicted object that has similar size and structure to the input image. Dilated convolutions are used in Image segmentations, Audio generations, Machine translations, etc. In many such applications one wants to integrate information from different spatial scales and balance two properties:
@@ -7,7 +9,7 @@ Dilated convolutions helps us in increasing the receptive field without adding a
 1. local, pixel-level accuracy, such as precise detection of edges, and
 2. integrating knowledge of the wider, global context
 
-Simply putting,
+In simple words,
 
 **When l=1, it is standard convolution.**
 
@@ -31,6 +33,10 @@ We can see that **the receptive field is larger** compared with the standard one
 In above image we see that Systematic dilation supports exponential expansion of the receptive field without loss of
 resolution or coverage. (a) F1 is produced from F0 by a 1-dilated convolution; each element in F1 has a receptive field of 3×3. (b) F2 is produced from F1 by a 2-dilated convolution; each element in F2 has a receptive field of 7×7. (c) F3 is produced from F2 by a 4-dilated convolution; each element in F3 has a receptive field of 15×15. The number of parameters associated with each layer is identical. The receptive field grows exponentially while the number of parameters grows linearly. easy to see that the size of the receptive field of each element in Fi+1 is (2i+2 − 1)×(2i+2 − 1).
 The receptive field is a square of exponentially increasing size.
+
+- Figure (a) is a 1-dilated 3x3 convolution filter. In other words, it's a standard 3x3 convolution filter.
+- Figure (b) is a 2-dilated 3x3 convolution filter. The red dots are where the weights are and everywhere else is 0. In other words, it's a **5x5 convolution filter with 9 non-zero weights and everywhere else 0**. The receptive field in this case is 7x7 because each unit in the previous output has a receptive field of 3x3. The highlighted portions in blue show the receptive field and **NOT** the convolution filter (you could see it as a convolution filter if you wanted to but it's not helpful).
+- Figure (c) is a 4-dilated 3x3 convolution filter. It's a **9x9 convolution filter with 9 non-zeros weights and everywhere else 0**. From (b), we have it that each unit now has a 7x7 receptive field, and hence you can see a 7x7 blue portion around each red dot.
 
 ------
 
@@ -64,9 +70,15 @@ Now if you notice above, you can see small checkboxes. This is checkerboard issu
 
 *Spatial Separable Convolutions*
 
+With growing usage of mobiles around the world we need a better convolutions technique which needs less computation and can be run on mobile devices. One can perform separable convolution spatially (spatially separable convolution) or depthwise (depthwise separable convolution). Separable Convolutions are used in some neural net architectures, such as the [MobileNet](<https://arxiv.org/abs/1704.04861>) (MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications)
+
 ![alt text](https://cdn-images-1.medium.com/max/2000/1*o3mKhG3nHS-1dWa_plCeFw.png)
 
 In this convolution instead of operating with 3x3 kernel over input image, we first convolve with 3x1 kernel and after getting intermediate result we again convolve with 1x3 kernel. Now by doing spatial separable convolutions we are only performing 6 multiplications instead of 9. 
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*7OF9tl-oRpDK_S3z-AMwnA.png)
+
+Above is another example explaining the same.
 
 Disadvantage:
 
@@ -93,7 +105,7 @@ Above is an example of normal convolution where our filter size is 5x5x3(height 
 
 ​                                                      Normal convolution with 8x8x256 output
 
-Well, we can create 256 kernels to create 256 8x8x1 images, then stack them up together to create a 8x8x256 image output.
+Well, we can create 256 kernels to create 256 images of 8x8x1 dimensions, then stack them up together to create a 8x8x256 image output.
 
 *Depth Wise Convolution*
 
@@ -110,15 +122,63 @@ Now you can say that Depthwise separable convolutions = Depthwise convolutions +
 1. **Depthwise convolution** is the **channel-wise DK×DK spatial convolution**. Suppose in the figure above, we have 5 channels, then we will have 5 DK×DK spatial convolution.
 2. **Pointwise convolution** actually is the **1×1 convolution** to change the dimension.
 
+Advantage of Depthwise Separable convolution over normal convolutions.
+
+ Computation of normal 2D:
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*QsxXZN0Pq9ZL_lckPtW6pw.png)
+
+Let's say we have 7x7x3 input image and we are convolving with a 3x3x3x1(height = 3, width = 3, channel=3, no. of kernel =1) filter on it. Now as we know the result will be 5x5x1. Let's check our calculation here:
+
+3x3x3x1x5x5x1 = 675
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*VzwZ3Igv9KL-TCV-ZkB4Dg.png)
+
+Now let's us do the same with with a 3x3x3x128 filter on it. Now as we know the result will be 5x5x128. Let's check our calculation here:
+
+3x3x3x128x5x5 = 86400
+
+ Computation of Depthwise separable convolution:
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*TT2ldUUD2JM2eSayC3i9Lw.png)
+
+Our input image is same as 7x7x3 and we convolve with 3x3x1x3(l = 3, w= 3, c=1, no of kernels = 3) kernels on it giving us an output image of 5x5x3
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*L7fGwFxJKBUVOiytuIpVEg.png)
+
+Now take this output image of 5x5x3 and convolve with 1x1x3x128 filter. Our output image will be 5x5x1 which is same as normal convolution. Let's check our calculation now:
+
+3x3x1 x3 x5x5 + 1x1x3x128x5x5 = 675 + 9600= 10275
+
+So, what’s the advantage of doing depthwise separable convolutions? Efficiency! One needs much less operations for depthwise separable convolutions compared to 2D convolutions. 
+
+According to [MobileNets White Paper](<https://arxiv.org/pdf/1704.04861.pdf>)
+
+```
+The standard convolutional layer is parameterized by convolution kernel K of size DK × DK × M × N where DK is the spatial dimension of the kernel assumed to be square and M is number of input channels and N is the number of output channels as defined previously.
+
+Standard convolutions have the computational cost of:
+DK · DK · M · N · DF · DF
+
+where the computational cost depends multiplicatively on the number of input channels M, the number of output channels N the kernel size Dk × Dk and the feature map size DF × DF.
+
+Depthwise separable convolutions cost:
+DK · DK · M · DF · DF + M · N · DF · DF
+
+which is the sum of the depthwise and 1 × 1 pointwise convolutions.
+
+MobileNet uses 3 × 3 depthwise separable convolutions which uses between 8 to 9 times less computation than standard convolutions at only a small reduction in accuracy
+```
+
+![alt text](https://image.slidesharecdn.com/mobilenetv1v2slide-180823083642/95/mobilenetv1-v2-slide-12-638.jpg?cb=1535013428)
+
+Above is the structure of standard convolutions vs depthwise separable convolutions
+
+Disadvantage:
+
+The depthwise separable convolutions reduces the number of parameters in the convolution. As such, for a small model, the model capacity may be decreased significantly if the 2D convolutions are replaced by depthwise separable convolutions. As a result, the model may become sub-optimal. However, if properly used, depthwise separable convolutions can give you the efficiency without dramatically damaging your model performance.
+
 ------
-
-
-
-
-
-# 
-
-
 
 
 
@@ -131,4 +191,6 @@ Reference:
 [Checker Board Issue](https://distill.pub/2016/deconv-checkerboard/)
 
 [Depthwise-Separable-Convolution](<https://towardsdatascience.com/review-mobilenetv1-depthwise-separable-convolution-light-weight-model-a382df364b69>)
+
+[Separable Convolution](<https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215>)
 
