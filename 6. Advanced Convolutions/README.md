@@ -180,7 +180,25 @@ The depthwise separable convolutions reduces the number of parameters in the con
 
 ------
 
+*Grouped convolution*
 
+Grouped convolution was introduced to efficiently make use of multiple GPU's ad perform parallel processing.
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*N4Ap65SA9rNf5HRrMhLf-Q.png)
+
+The AlexNet above shows two separate convolution paths at most of the layers. It’s doing model-parallelization across two GPUs. If we notice, there are 2 separate task happening and later we combine the output of both.
+
+As we already know normal convolution works by in traditional way of kernels moving over input images like below:
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*oFVlkvZp848nh-QoD3pREw.png)
+
+In above example, the input layer of size (7 x 7 x 3) is transformed into the output layer of size (5 x 5 x 128) by applying 128 filters (each filter is of size 3 x 3 x 3). Or in general case, the input layer of size (Hin x Win x Din) is transformed into the output layer of size (Hout x Wout x Dout) by applying Dout kernels (each is of size h x w x Din).
+
+In grouped convolution, the filters are separated into different groups. Each group is responsible for a conventional 2D convolutions with certain depth. The following examples can make this clearer.
+
+![alt text](https://cdn-images-1.medium.com/max/2000/1*dBrsVP0nt_PrBlICSBTttg.png)
+
+Above is the illustration of grouped convolution with 2 filter groups. In each filter group, the depth of each filter is only half of the that in the nominal 2D convolutions. They are of depth Din / 2. Each filter group contains Dout /2 filters. The first filter group (red) convolves with the first half of the input layer ([:, :, 0:Din/2]), while the second filter group (blue) convolves with the second half of the input layer ([:, :, Din/2:Din]). As a result, each filter group creates Dout/2 channels. Overall, two groups create 2 x Dout/2 = Dout channels. We then stack these channels in the output layer with Dout channels.
 
 Reference:
 
@@ -193,4 +211,6 @@ Reference:
 [Depthwise-Separable-Convolution](<https://towardsdatascience.com/review-mobilenetv1-depthwise-separable-convolution-light-weight-model-a382df364b69>)
 
 [Separable Convolution](<https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215>)
+
+[Grouped convolution](<https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215>)
 
