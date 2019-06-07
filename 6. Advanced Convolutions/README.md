@@ -1,7 +1,5 @@
 ## Advanced Convolutions
 
-
-
 *Dilated Convolution a.k.a Atrous Convolution*
 
 Dilated convolutions helps us in increasing the receptive field without adding any parameters to our network. The key application the dilated convolution authors have in mind is dense prediction: vision applications where the predicted object that has similar size and structure to the input image. Dilated convolutions are used in Image segmentations, Audio generations, Machine translations, etc. In many such applications one wants to integrate information from different spatial scales and balance two properties:
@@ -200,6 +198,18 @@ In grouped convolution, the filters are separated into different groups. Each gr
 
 Above is the illustration of grouped convolution with 2 filter groups. In each filter group, the depth of each filter is only half of the that in the nominal 2D convolutions. They are of depth Din / 2. Each filter group contains Dout /2 filters. The first filter group (red) convolves with the first half of the input layer ([:, :, 0:Din/2]), while the second filter group (blue) convolves with the second half of the input layer ([:, :, Din/2:Din]). As a result, each filter group creates Dout/2 channels. Overall, two groups create 2 x Dout/2 = Dout channels. We then stack these channels in the output layer with Dout channels.
 
+*Bonus*:
+
+## Tips For Using Dropout
+
+The original paper on Dropout provides experimental results on a suite of standard machine learning problems. As a result they provide a number of useful heuristics to consider when using dropout in practice.
+
+- Generally, use a small dropout value of 20%-50% of neurons with 20% providing a good starting point. A probability too low has minimal effect and a value too high results in under-learning by the network.
+- Use a larger network. You are likely to get better performance when dropout is used on a larger network, giving the model more of an opportunity to learn independent representations.
+- Use dropout on incoming (visible) as well as hidden units. Application of dropout at each layer of the network has shown good results.
+- Use a large learning rate with decay and a large momentum. Increase your learning rate by a factor of 10 to 100 and use a high momentum value of 0.9 or 0.99.
+- Constrain the size of network weights. A large learning rate can result in very large network weights. Imposing a constraint on the size of network weights such as max-norm regularization with a size of 4 or 5 has been shown to improve results.
+
 Reference:
 
 [Dilated Convo White paper](https://arxiv.org/pdf/1511.07122.pdf)
@@ -213,4 +223,6 @@ Reference:
 [Separable Convolution](<https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215>)
 
 [Grouped convolution](<https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215>)
+
+[DropOut](<https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/>)
 
