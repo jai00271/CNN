@@ -180,7 +180,7 @@ The depthwise separable convolutions reduces the number of parameters in the con
 
 *Grouped convolution*
 
-Grouped convolution was introduced to efficiently make use of multiple GPU's ad perform parallel processing.
+Grouped convolution was introduced to efficiently make use of multiple GPU's and perform parallel processing.
 
 ![alt text](https://cdn-images-1.medium.com/max/2000/1*N4Ap65SA9rNf5HRrMhLf-Q.png)
 
