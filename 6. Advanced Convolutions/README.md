@@ -32,10 +32,6 @@ In above image we see that Systematic dilation supports exponential expansion of
 resolution or coverage. (a) F1 is produced from F0 by a 1-dilated convolution; each element in F1 has a receptive field of 3×3. (b) F2 is produced from F1 by a 2-dilated convolution; each element in F2 has a receptive field of 7×7. (c) F3 is produced from F2 by a 4-dilated convolution; each element in F3 has a receptive field of 15×15. The number of parameters associated with each layer is identical. The receptive field grows exponentially while the number of parameters grows linearly. easy to see that the size of the receptive field of each element in Fi+1 is (2i+2 − 1)×(2i+2 − 1).
 The receptive field is a square of exponentially increasing size.
 
-- Figure (a) is a 1-dilated 3x3 convolution filter. In other words, it's a standard 3x3 convolution filter.
-- Figure (b) is a 2-dilated 3x3 convolution filter. The red dots are where the weights are and everywhere else is 0. In other words, it's a **5x5 convolution filter with 9 non-zero weights and everywhere else 0**. The receptive field in this case is 7x7 because each unit in the previous output has a receptive field of 3x3. The highlighted portions in blue show the receptive field and **NOT** the convolution filter (you could see it as a convolution filter if you wanted to but it's not helpful).
-- Figure (c) is a 4-dilated 3x3 convolution filter. It's a **9x9 convolution filter with 9 non-zeros weights and everywhere else 0**. From (b), we have it that each unit now has a 7x7 receptive field, and hence you can see a 7x7 blue portion around each red dot.
-
 ------
 
 *DECONVOLUTION or Fractionally Strided OR Transpose Convolution*
