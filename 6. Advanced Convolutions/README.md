@@ -146,6 +146,10 @@ Now take this output image of 5x5x3 and convolve with 1x1x3x128 filter. Our outp
 
 So, what’s the advantage of doing depthwise separable convolutions? Efficiency! One needs much less operations for depthwise separable convolutions compared to 2D convolutions. 
 
+Incase you want to compare the difference, here is another calculation showing the difference between both normal convo 2d and Depthwise separable convolution by convolving on 64x64x128 image with (3x3x3)x256 kernels:
+
+![alt text](https://thepracticaldev.s3.amazonaws.com/i/k407916a5pdmidp9ooh8.jpg)
+
 According to [MobileNets White Paper](<https://arxiv.org/pdf/1704.04861.pdf>)
 
 ```
