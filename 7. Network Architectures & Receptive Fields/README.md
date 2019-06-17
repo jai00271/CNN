@@ -16,7 +16,7 @@ Stride: How many pixels are you skipping while convolving.
 
 Refer below image for better understanding:
 
-![](StrideAndPadding.jpg)
+![](Images/StrideAndPadding.jpg)
 
 Once we have calculated the output image size using the above formula, we need to calculate:
 
@@ -50,7 +50,7 @@ Now lets get see some examples:
 
 Now lets take our game 1 notch up and try VGG-VD-16 receptive field
 
-![VGG](vgg-vd-16-receptive-field.png) 
+![VGG](Images/vgg-vd-16-receptive-field.png) 
 
 Formula to be used:
 
@@ -144,4 +144,4 @@ Layer0: 224x224x3
 
 Now we will try stimulating the same using online calculator: [Receptive-Field-Calculator](<https://fomoro.com/research/article/receptive-field-calculator>)
 
-![](ReceptiveFieldCalculation.png)
+![](Images/ReceptiveFieldCalculation.png)
