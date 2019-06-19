@@ -115,33 +115,13 @@ Layer0: Input image of size 224x224x3
 19. FC:
     1. Layer19: R(out) = 212 + (7-1)*32  = 212 + 192 = 404
 
+
+
 On page 6 of [Going deeper with convolutions](<https://arxiv.org/pdf/1409.4842.pdf>) whitepaper, author have mentioned that RF of the network is 224x224. So let's solve it. 
 
 ![](https://raw.githubusercontent.com/sumitc91/data/master/askgif/hd_61a3c07b-6ac3-478c-b068-10e54cde95ac_sunny-deol_wm_icon.gif)
 
-Layer0: 224x224x3
-
-1. Convolution 7x7 with stride = 2:  
-   1. Layer1: R(out) =  1 + (7-1) * 1 = 7 // Should J(in) be 1*2 = 2?
-   2. J(out) = 1*2 = 2
-2. Max Pool (3x3):
-   1. Layer2: R(out) = 7 + (3-1)* 2 = 7 + 4 = 11
-   2. J(out) = 2 * 2 = 4 //In Maxpool stride will be 2
-3. Convolution 3x3:  
-   1. Layer3: R(out) =  9 + (3-1) * 2 = 9 + 4 = 13
-   2. J(out) = 4*1 = 4
-4. Max Pool (2x2):
-   1. Layer4: R(out) = 13 + (2-1)* 4 = 13 + 4 = 17
-   2. J(out) = 4 * 2 = 8 //In Maxpool stride will be 2
-5. Inception => 1x1, 3x3, 5x5:  
-   1. Layer5: R(out) =  17 + (1-1) * 8 = 17
-   2. Layer6: R(out) =  17 + (3-1) * 8 = 17 + 16 = 33
-   3. Layer5: R(out) =  33+ (5-1) * 8 = 33 + 32 = 65
-   4. J(out) = 8*1 = 8
-6. Max Pool (2x2):
-   1. Layer4: R(out) = 65+ (2-1)* 8 = 65 + 8 = 73
-   2. J(out) = 8 * 2 = 16 //In Maxpool stride will be 2
-
 Now we will try stimulating the same using online calculator: [Receptive-Field-Calculator](<https://fomoro.com/research/article/receptive-field-calculator>)
 
 ![](Images/ReceptiveFieldCalculation.png)
+
