@@ -119,7 +119,17 @@ Layer0: Input image of size 224x224x3
 
 On page 6 of [Going deeper with convolutions](<https://arxiv.org/pdf/1409.4842.pdf>) whitepaper, author have mentioned that RF of the network is 224x224. So let's solve it. 
 
+
+
 ![](https://raw.githubusercontent.com/sumitc91/data/master/askgif/hd_61a3c07b-6ac3-478c-b068-10e54cde95ac_sunny-deol_wm_icon.gif)
+
+![](C:/Users/mritunjai_pratapsing/Documents/Personal/Training/ML/EVA/Class%20DNN/7.%20Network%20Architectures%20&%20Receptive%20Fields/Images/GoogleNetImage.png)
+
+Well the paper never said anything about the input size of the image. Let us use our formula to find out the same:
+
+112 = (Nin +2*0 - 7)/2 + 1
+
+Nin = 111*2 + 7 = 222 + 7 = 229
 
 ![alt text](Images/ReceptiveFieldCalculationM.jpg)
 
