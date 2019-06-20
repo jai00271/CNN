@@ -121,7 +121,5 @@ On page 6 of [Going deeper with convolutions](<https://arxiv.org/pdf/1409.4842.p
 
 ![](https://raw.githubusercontent.com/sumitc91/data/master/askgif/hd_61a3c07b-6ac3-478c-b068-10e54cde95ac_sunny-deol_wm_icon.gif)
 
-Now we will try stimulating the same using online calculator: [Receptive-Field-Calculator](<https://fomoro.com/research/article/receptive-field-calculator>)
-
-![](Images/ReceptiveFieldCalculation.png)
+![alt text](Images\ReceptiveFieldCalculationM.jpg)
 
