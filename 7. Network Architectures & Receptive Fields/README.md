@@ -129,7 +129,8 @@ Well the paper never said anything about the input size of the image. Let us use
 
 112 = (Nin +2*0 - 7)/2 + 1
 
-Nin = 111*2 + 7 = 222 + 7 = 229
+Input Image, Nin = 111*2 + 7 = 222 + 7 = 229
 
 ![alt text](Images/ReceptiveFieldCalculationM.jpg)
 
+So the expected answer is 224 but we ended up with 323 receptive field. 
