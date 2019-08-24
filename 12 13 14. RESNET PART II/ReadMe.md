@@ -4,8 +4,6 @@ Keras supports the early stopping of training via a callback called *EarlyStoppi
 
 This callback allows you to specify the performance measure to monitor, the trigger, and once triggered, it will stop the training process.
 
-The *EarlyStopping* callback is configured when instantiated via arguments.
-
 The “*monitor*” allows you to specify the performance measure to monitor in order to end training. Recall from the previous section that the calculation of measures on the validation dataset will have the ‘*val_*‘ prefix, such as ‘*val_loss*‘ for the loss on the validation dataset.
 
 ```python
@@ -66,7 +64,7 @@ Please check [cifar10_resnet.py](https://github.com/yu4u/cutout-random-erasing/b
 
 What we need to do is add only two lines:
 
-```
+```python
 ...
 from random_eraser import get_random_eraser  # added
 ...
@@ -159,10 +157,48 @@ In order to use this implementation we need to define a few values first:
 - **Cycle:** Number of iterations it takes for our learning rate to go from the lower bound, ascend to the upper bound, and then descend back to the lower bound again.
 - **Step size:** Number of iterations in a half cycle. Leslie Smith, the creator of CLRs, recommends that the step_size should be (2-8) * training_iterations_in_epoch). **In practice, I have found that step sizes or either 4 or 8 work well in most situations.**
 
+## (Slanted) Triangular
+
+While trying to push the boundaries of batch size for faster training, [Priya Goyal et al. (2017)](https://arxiv.org/abs/1706.02677) found that having a smooth linear warm up in the learning rate at the start of training improved the stability of the optimizer and lead to better solutions. It was found that a smooth increases gave improved performance over stepwise increases.
+
+Lets look at “warm-up” in more detail later in the tutorial, but this could be viewed as a specific case of the **“triangular”** schedule that was proposed by [Leslie N. Smith (2015)](https://arxiv.org/abs/1506.01186). Quite simply, the schedule linearly increases then decreases between a lower and upper bound. Originally it was suggested this schedule be used as part of a cyclical schedule but more recently researchers have been using a single cycle.
+
+One adjustment proposed by [Jeremy Howard, Sebastian Ruder (2018)](https://arxiv.org/abs/1801.06146) was to change the ratio between the increasing and decreasing stages, instead of the 50:50 split. Changing the increasing fraction (`inc_fraction!=0.5`) leads to a **“slanted triangular”** schedule. Using `inc_fraction<0.5` tends to give better results.
+
+![png](https://raw.githubusercontent.com/dmlc/web-data/master/mxnet/doc/tutorials/lr_schedules/adv_triangular.png)
+
+## What is an “iteration” in a learning rate finder?
+
+The common definition of `epoch` or `num_iteration = num_examples/batch_size` — so each iteration is indeed a mini-batch (and num_iteration make up one epoch or 1 complete pass through the dataset)
+
+If you e.g ran `learn.fit(1e-2, 3, cycle_len=1)` you would see that there are ~360 iterations (=1 epoch) before the lr plot cycles (goes back to 0.01) [360 ~ (11500 cats+11500 dogs)/64]. In this case, each iteration correspond to a single mini-batch of size 64.
+
+![output_25_0](https://forums.fast.ai/uploads/default/original/2X/2/2b56caa0a5f87fb17429eb961fa2adf77f299547.png)
+
+However, its easy to get confused once you start experimenting with different `cycle_mult`. E.g., if you set `cycle-multi=2` (whilst keeping `cycle_len=1`), during the second cyle you should see about 720 iterations. This is because we went through the dataset twice.
+
+
+
+[![lr_complex](https://forums.fast.ai/uploads/default/optimized/2X/6/640029e7e8469b74e49789f44e582c7b5416b1ad_2_690x405.png)lr_complex.png912×536 54.9 KB](https://forums.fast.ai/uploads/default/original/2X/6/640029e7e8469b74e49789f44e582c7b5416b1ad.png)
+
+
+
+As for your SGD question, in DL one typically uses [mini-batch gradient descent 6](http://ruder.io/optimizing-gradient-descent/index.html#minibatchgradientdescent) (although colloquially its called SGD). It means, the updates are done after each mini-batch. To wit, If you have 64 image/batch, you average your gradient based on 64 examples at a time and update the parameters.
+
+Finally, the old-school(?) SGD updates gradients after each example (here is a [fun 4](http://ruder.io/optimizing-gradient-descent/index.html#hogwild) implementation if you are interested for more)
+
+
+
 References:
 
 [CutOut](https://github.com/yu4u/cutout-random-erasing)
 
 [Cyclic LR](https://www.pyimagesearch.com/2019/07/29/cyclical-learning-rates-with-keras-and-deep-learning/)
 
-Cyclic LR](https://github.com/bckenstler/CLR)
+[Cyclic LR](https://github.com/bckenstler/CLR)
+
+[Types of Cyclic LR](https://mxnet.incubator.apache.org/versions/master/tutorials/gluon/learning_rate_schedules_advanced.html)
+
+[what-is-an-iteration-in-a-learning-rate-finder](https://forums.fast.ai/t/what-is-an-iteration-in-a-learning-rate-finder/10774/2)
+
+[One Cycle](https://sgugger.github.io/the-1cycle-policy.html)
