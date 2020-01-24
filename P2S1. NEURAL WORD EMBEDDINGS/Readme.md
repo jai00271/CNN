@@ -2,8 +2,8 @@
 
 Training and validation Accuracy
 
-![](Images\Training and validation accuracy.png)
+![](Images/Training and validation accuracy.png)
 
 **Training and validation loss**
 
-![](Images\Training and validation loss.png)
+![](Images/Training and validation loss.png)
